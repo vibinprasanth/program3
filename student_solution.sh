@@ -24,20 +24,21 @@ echo "=========================================="
 # TODO 1:
 # Create the directory /webdata/files
 # ------------------------------------------------------------
-
+mkdir -p /webdata/files
 
 # ------------------------------------------------------------
 # TODO 2:
 # Create the file /webdata/files/index.html
 # ------------------------------------------------------------
-
+touch /webdata/files/index.html
 
 # ------------------------------------------------------------
 # TODO 3:
 # Display the current SELinux context
 # of /webdata and index.html
 # ------------------------------------------------------------
-
+ls -Zd /webdata
+ls -Z /webdata/files/index.html
 
 # ------------------------------------------------------------
 # TODO 4:
@@ -49,21 +50,22 @@ echo "=========================================="
 #
 # Use semanage fcontext
 # ------------------------------------------------------------
-
+semanage fcontext -a -t httpd_sys_content_t"/webdata(/.*)?"
 
 # ------------------------------------------------------------
 # TODO 5:
 # Apply the permanent SELinux rule
 # using restorecon recursively.
 # ------------------------------------------------------------
-
+restorecom -Rv /webdata
 
 # ------------------------------------------------------------
 # TODO 6:
 # Verify the final SELinux contexts
 # of /webdata and index.html
 # ------------------------------------------------------------
-
+ls -Zd /webdata
+ls -Z /webdata/files/index.html
 
 echo "=========================================="
 echo " Assignment completed"
